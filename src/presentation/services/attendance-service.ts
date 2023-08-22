@@ -10,11 +10,24 @@ import { CreateAttendance } from "@domain/attendence/usecases/create-attendance"
 import { Attendance } from "@data/attendance/models/attendance-models";
  
 // get the current time
+// function formatCurrentTime() {
+//   const now = new Date();
+//   const hours = now.getHours();
+//   const minutes = now.getMinutes();
+//   const seconds = now.getSeconds();
+//   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+//     .toString()
+//     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+//   return formattedTime;
+// }
+
 function formatCurrentTime() {
   const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
+  const timezoneOffset = now.getTimezoneOffset(); // in minutes
+  const localTime = new Date(now.getTime() + timezoneOffset * 60000); // adjust for offset in milliseconds
+  const hours = localTime.getHours();
+  const minutes = localTime.getMinutes();
+  const seconds = localTime.getSeconds();
   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
