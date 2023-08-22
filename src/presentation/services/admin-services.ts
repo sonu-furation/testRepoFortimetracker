@@ -183,7 +183,8 @@ export class AdminService {
         };
 
         const resData = { admin: AdminMapper.toEntity(admin, true) };
-        res.cookie("token", token, options).json(resData);
+        // res.cookie("token", token, options).json(resData);
+        res.json({userCredential:resData,token:token})
       }
     );
   }
