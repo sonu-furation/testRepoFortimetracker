@@ -9,7 +9,7 @@ export interface AttendanceSource {
   delete(id: string): Promise<void>;
   read(id: string): Promise<any | null>; // Return type should be Promise of AdminEntity or null
   getAllAttendance(): Promise<any>;
-}
+} 
 
 export class AttendanceSourceImpl implements AttendanceSource {
   constructor(private db: mongoose.Connection) {}
