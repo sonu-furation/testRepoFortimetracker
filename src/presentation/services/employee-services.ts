@@ -96,30 +96,6 @@ export class EmployeeService {
     );
   }
 
-  // async deleteEmployee(req: Request, res: Response): Promise<void> {
-  //   const employeeId: string = req.params.employeeId;
-
-  //   const updatedEmployeeEntity: EmployeeEntity = EmployeeMapper.toEntity(
-  //     { delStatus: "Deleted" },
-  //     true
-  //   );
-  //   // Call the UpdateEmployeeUsecase to delete the Employee
-  //   const updatedEmployee: Either<ErrorClass, EmployeeEntity> =
-  //     await this.UpdateEmployeeUsecase.execute(
-  //       employeeId,
-  //       updatedEmployeeEntity
-  //     );
-
-  //   updatedEmployee.cata(
-  //     (error: ErrorClass) =>
-  //       res.status(error.status).json({ error: error.message }),
-  //     (result: EmployeeEntity) => {
-  //       const responseData = EmployeeMapper.toModel(result);
-  //       return res.json(responseData);
-  //     }
-  //   );
-  // }
-
   async getEmployeeById(req: Request, res: Response): Promise<void> {
     const employeeId: string = req.params.employeeId;
 
