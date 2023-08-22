@@ -21,18 +21,37 @@ import { Attendance } from "@data/attendance/models/attendance-models";
 //   return formattedTime;
 // }
 
+// function formatCurrentTime() {
+//   const now = new Date();
+//   const timezoneOffset = now.getTimezoneOffset(); // in minutes
+//   const localTime = new Date(now.getTime() + timezoneOffset * 60000); // adjust for offset in milliseconds
+//   const hours = localTime.getHours();
+//   const minutes = localTime.getMinutes();
+//   const seconds = localTime.getSeconds();
+//   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+//     .toString()
+//     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+//   return formattedTime;
+// }
+
+
 function formatCurrentTime() {
-  const now = new Date();
-  const timezoneOffset = now.getTimezoneOffset(); // in minutes
-  const localTime = new Date(now.getTime() + timezoneOffset * 60000); // adjust for offset in milliseconds
-  const hours = localTime.getHours();
-  const minutes = localTime.getMinutes();
-  const seconds = localTime.getSeconds();
-  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
-    .toString()
-    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-  return formattedTime;
+  // Set the timezone to Indian Standard Time (IST)
+  const indianTimezone = 'Asia/Kolkata';
+  // Create a new Date object with the current time
+  const currentTime = new Date();
+  // Convert the current time to IST
+  const currentTimeIST = new Date(currentTime.toLocaleString('en-US', { timeZone: indianTimezone }));
+  // Format the IST time as a string
+  const formattedTimeIST = currentTimeIST.toLocaleString('en-US', { timeZone: indianTimezone, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  return formattedTimeIST;
 }
+
+
+
+
+
+
 // get the current date
 function getCurrentDate() {
   const now = new Date();
@@ -89,7 +108,8 @@ export class AttendanceService {
   }
 
   async updateAttendance(req: Request, res: Response): Promise<void> {
-    const currentTime = formatCurrentTime();
+    const currentTime = formatCurrentTime().split(",")[1];
+    // currentTime.split(",")[1]
     const currentDate = getCurrentDate();
     const { userId } = req.body;
     // find the attendance details by User_id 
