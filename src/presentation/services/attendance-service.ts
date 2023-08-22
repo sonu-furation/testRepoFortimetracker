@@ -21,17 +21,31 @@ import { Attendance } from "@data/attendance/models/attendance-models";
 //   return formattedTime;
 // }
 
+// function formatCurrentTime() {
+//   const now = new Date();
+//   const timezoneOffset = now.getTimezoneOffset(); // in minutes
+//   const localTime = new Date(now.getTime() + timezoneOffset * 60000); // adjust for offset in milliseconds
+//   const hours = localTime.getHours();
+//   const minutes = localTime.getMinutes();
+//   const seconds = localTime.getSeconds();
+//   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+//     .toString()
+//     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+//   return formattedTime;
+// }
+
 function formatCurrentTime() {
-  const now = new Date();
-  const timezoneOffset = now.getTimezoneOffset(); // in minutes
-  const localTime = new Date(now.getTime() + timezoneOffset * 60000); // adjust for offset in milliseconds
-  const hours = localTime.getHours();
-  const minutes = localTime.getMinutes();
-  const seconds = localTime.getSeconds();
-  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
-    .toString()
-    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-  return formattedTime;
+  const currentTimeUTC = new Date();
+  const indianTimezoneOffset = 5.5 * 60 * 60 * 1000; // Indian Standard Time offset in milliseconds
+  const currentTimeIST = new Date(
+    currentTimeUTC.getTime() + indianTimezoneOffset
+  );
+
+  const hours = currentTimeIST.getUTCHours().toString().padStart(2, "0");
+  const minutes = currentTimeIST.getUTCMinutes().toString().padStart(2, "0");
+  const seconds = currentTimeIST.getUTCSeconds().toString().padStart(2, "0");
+
+  return `${hours}:${minutes}:${seconds}`;
 }
 // get the current date
 function getCurrentDate() {
