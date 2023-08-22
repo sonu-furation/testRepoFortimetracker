@@ -101,7 +101,9 @@ export class AttendanceService {
         checkOut: currentTime,
         duration: Duration,
       });
-      res.send({ msg: `check-out successfully.` });
+      const user1 = await Attendance.find({date:currentDate})
+
+      res.send({user1, msg: `check-out successfully.` });
     } catch (err: any) {
       res.send({ 
         msg: "somthing went wrong! cannot checkout.",
